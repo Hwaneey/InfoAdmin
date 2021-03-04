@@ -1,4 +1,4 @@
-package com.infognc.administrator.Infra.config;
+package com.infognc.administrator.Infra.Listener;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEvent;
