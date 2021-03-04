@@ -19,10 +19,13 @@ public class AccountEntity {
     private int idxAgent;
 
     @NotNull
+    private String agentId;
+
+    @NotNull
     private String agentNum;
 
     @NotNull
-    private String agentId;
+    private String agentName;
 
     @NotNull
     private String part;
@@ -35,9 +38,6 @@ public class AccountEntity {
 
     @NotNull
     private String password;
-
-    @NotNull
-    private String agentName;
 
     @NotNull
     private String regDate;
