@@ -3,6 +3,7 @@ package com.infognc.Administrator.Infra.Listener;
 import com.infognc.Administrator.Infra.Config.PasswordConfig;
 import com.infognc.Administrator.Modules.Account.AccountRepository;
 import com.infognc.Administrator.Modules.RoleHierachy.RoleHierarchyEntity;
+import com.infognc.Administrator.Modules.RoleHierachy.RoleHierarchyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
@@ -13,7 +14,7 @@ public class SetupDataLoader implements ApplicationListener {
 
     private boolean alreadySetup = false;
     private final AccountRepository accountRepository;
-//    private final RoleHierarchyEntity
+    private final RoleHierarchyRepository roleHierarchyRepository;
     private final PasswordConfig passwordConfig;
 
     @Override

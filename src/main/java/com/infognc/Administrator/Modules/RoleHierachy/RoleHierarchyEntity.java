@@ -14,12 +14,13 @@ public class RoleHierarchyEntity implements Serializable {
     @Id @GeneratedValue
     private Long id;
 
-    @Column
+    @Column(name = "child_name")
     private String childName;
 
     @ManyToOne(cascade = {CascadeType.ALL},fetch = FetchType.LAZY)
-    @JoinColumn(name = "parentName", referencedColumnName = "childName")
+    @JoinColumn(name = "parent_name", referencedColumnName = "child_name")
     private RoleHierarchyEntity parentName;
 
     @OneToMany(mappedBy = "parentName", cascade={CascadeType.ALL})
-    private Set<RoleHierarchyEntity> roleHierarchyEntities = new HashSet<RoleHierarchyEntity>();}
+    private Set<RoleHierarchyEntity> roleHierarchyEntities = new HashSet<RoleHierarchyEntity>();
+}
