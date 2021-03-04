@@ -14,7 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class RoleEntity {
 
-    @Id  @GeneratedValue @Column(name = "role_id")
+    @Id  @GeneratedValue @Column
     private Long id;
 
     @Column
