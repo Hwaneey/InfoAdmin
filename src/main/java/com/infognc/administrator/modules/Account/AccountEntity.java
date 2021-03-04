@@ -1,4 +1,4 @@
-package com.infognc.administrator.Account;
+package com.infognc.administrator.modules.Account;
 
 import com.sun.istack.NotNull;
 import lombok.*;

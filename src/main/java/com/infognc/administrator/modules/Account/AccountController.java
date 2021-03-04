@@ -1,8 +1,7 @@
-package com.infognc.administrator.Account;
+package com.infognc.administrator.modules.Account;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -10,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class AccountController {
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home() {
         return "index";
     }
 
