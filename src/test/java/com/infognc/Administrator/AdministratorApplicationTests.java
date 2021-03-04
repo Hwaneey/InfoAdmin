@@ -1,4 +1,4 @@
-package com.infognc.administrator;
+package com.infognc.Administrator;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

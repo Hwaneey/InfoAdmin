@@ -1,4 +1,4 @@
-package com.infognc.administrator.Infra.config;
+package com.infognc.Administrator.Infra.Config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

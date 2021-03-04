@@ -1,4 +1,4 @@
-package com.infognc.administrator.modules.Account;
+package com.infognc.Administrator.Modules.Account;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

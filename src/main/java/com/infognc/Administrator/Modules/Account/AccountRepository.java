@@ -1,4 +1,4 @@
-package com.infognc.administrator.modules.Account;
+package com.infognc.Administrator.Modules.Account;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;

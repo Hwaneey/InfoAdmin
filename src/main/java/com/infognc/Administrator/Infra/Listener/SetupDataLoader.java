@@ -1,4 +1,4 @@
-package com.infognc.administrator.Infra.Listener;
+package com.infognc.Administrator.Infra.Listener;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEvent;
@@ -17,4 +17,5 @@ public class SetupDataLoader implements ApplicationListener {
     }
     alreadySetup = true;
     }
+
 }

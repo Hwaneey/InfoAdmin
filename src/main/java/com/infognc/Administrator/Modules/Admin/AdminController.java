@@ -1,4 +1,4 @@
-package com.infognc.administrator.modules.Admin;
+package com.infognc.Administrator.Modules.Admin;
 
 import org.springframework.stereotype.Controller;
 
