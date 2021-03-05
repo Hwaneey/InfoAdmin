@@ -8,21 +8,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity @EqualsAndHashCode(of = "id")
-@Getter
-@Setter @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor @Builder
 public class RoleEntity {
 
-    @Id  @GeneratedValue @Column
+    @Id  @GeneratedValue
+    @Column(name = "role_id")
     private Long id;
 
-    @Column
+    @Column(name = "role_name")
     private String roleName;
 
-    @Column
+    @Column(name = "role_desc")
     private String roleDesc;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "userRoles")
-    private Set<AccountEntity> accounts = new HashSet<>();
+    private Set<AccountEntity> accountEntities = new HashSet<>();
 }

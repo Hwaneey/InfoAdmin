@@ -15,5 +15,4 @@ public class AccountService extends User  {
         super(accountEntity.getAgentId(), accountEntity.getPassword(),List.of(new SimpleGrantedAuthority("ROLE_USER")));
         this.accountEntity = accountEntity;
     }
-
 }

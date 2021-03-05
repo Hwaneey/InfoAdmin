@@ -1,21 +1,22 @@
 package com.infognc.Administrator.Modules.Account;
 
+import com.infognc.Administrator.Modules.Role.RoleEntity;
 import com.sun.istack.NotNull;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @EqualsAndHashCode(of = "idxAgent")
+@ToString(exclude = {"userRoles"})
 @Entity @Getter @Setter @NoArgsConstructor
 @AllArgsConstructor @Builder
 public class AccountEntity {
 
-    @Id
-    @GeneratedValue @Column
+    @Id @GeneratedValue
+    @Column(name = "account_id")
     private int idxAgent;
 
     @NotNull
@@ -29,6 +30,14 @@ public class AccountEntity {
 
     @NotNull
     private String part;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
+    @JoinTable(
+            name = "account_roles",
+            joinColumns = { @JoinColumn(name = "account_id") },
+            inverseJoinColumns = { @JoinColumn(name = "role_id") }
+    )
+    private Set<RoleEntity> userRoles = new HashSet<>();
 
     @NotNull
     private String level;
