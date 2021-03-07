@@ -57,7 +57,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
     }
 
 
-    @Transactional
+
     public Account createUserIfNotFound(final String userName, final String password, Set<Role> roleSet) {
         Account account = accountRepository.findByAgentId(userName);
 
