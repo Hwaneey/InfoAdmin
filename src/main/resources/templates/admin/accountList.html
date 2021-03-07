@@ -1,0 +1,108 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head">
+
+<body>
+<div th:replace="/fragments/nav :: main-nav"></div>
+
+			<div class="col-xs-10">
+				<br>
+				<dt class="h2"> &nbsp 전체 회원 (<span th:text="${accounts.size()}"></span>)</dt>
+				<hr>
+
+				<div class="row justify-content-center">
+					<div class="col-sm-10">
+						<nav>
+							<ul class="pagination justify-content-center">
+
+								<li class="page-item" th:classappend="${!accountPage.hasPrevious()}? disabled">
+									<a th:href="@{'/admin' +  '/accounts?' + 'desc&page=' + ${accountPage.getNumber() - 1}}"
+									   class="page-link" tabindex="-1" aria-disabled="true">
+										Previous
+									</a>
+								</li>
+
+								<li class="page-item" th:classappend="${i == accountPage.getNumber()}? active"
+									th:each="i: ${#numbers.sequence(0, accountPage.getTotalPages() - 1)}">
+									<a th:href="@{'/admin' +  '/accounts?' + 'desc&page=' + ${i}}"
+									   class="page-link" href="#" th:text="${i + 1}">1</a>
+								</li>
+
+								<li class="page-item" th:classappend="${!accountPage.hasNext()}? disabled">
+									<a th:href="@{'/admin' +  '/accounts?' + 'desc&page=' + ${accountPage.getNumber() + 1}}"
+									   class="page-link">
+										Next
+									</a>
+								</li>
+
+							</ul>
+						</nav>
+					</div>
+				</div>
+
+				<table class="table table-bordered">
+					<thead>
+					<tr class="thead">
+						<th scope="col">아이디</th>
+						<th scope="col">사번</th>
+						<th scope="col">이름</th>
+						<th scope="col">부서</th>
+						<th scope="col">권한</th>
+						<th scope="col">업무상태</th>
+						<th scope="col">전화번호</th>
+						<th scope="col">마지막 접속 시간</th>
+						<th scope="col">계정상태</th>
+					</tr>
+					</thead>
+
+					<tbody>
+					<tr class="link_btn hover" th:each="accounts: ${accountPage}">
+
+						<td style="text-align: left;">
+							<a><span th:text="${accounts.agentId}">회원</span></a>
+						</td>
+
+						<td style="text-align: left;" th:text="${accounts.agentNum}">
+						</td>
+
+						<td class="date-time" style="text-align: left;" th:text="${accounts.agentName}">
+						</td>
+
+						<td class="date-time" style="text-align: left;" th:text="${accounts.part}">
+						</td>
+
+						<td style="text-align: left;">
+							<span th:each="role,iter : ${accounts.userRoles}">
+								<h6 th:text="${role.roleDesc}"></h6>
+							</span>
+						</td>
+
+						<td class="date-time" style="text-align: left;" th:text="${accounts.status}">
+						</td>
+
+						<td class="date-time" style="text-align: left;" th:text="${accounts.agentCallNum}">
+						</td>
+
+						<td class="date-time" style="text-align: left;" th:text="${accounts.lastDate}">
+						</td>
+
+						<td class="date-time" style="text-align: left;" th:text="${accounts.delFlag}">
+						</td>
+					</tr>
+					</tbody>
+
+				</table>
+
+				<dd>
+				<hr>
+				<div style="text-align:left;">
+					<p><a class="btn btn-dark btn-lg" style="margin:10;" th:href="@{/admin/accountRegister}">회원 등록</a></p>
+				</div>
+			</div>
+
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+	});
+
+</script>
+</html>
