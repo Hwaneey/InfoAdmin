@@ -5,56 +5,62 @@
 
 <div class="container d-flex justify-content-center">
     <div style="width:700px; margin-top: 30px;">
-        <form class="form-horizontal" th:action="@{/accountRegister}" method="post">
+        <form class="form-horizontal" th:action="@{/admin/accountUpdate}" method="post" th:object="${account}">
+            <input th:type="hidden" name="id" th:value="*{id}"/>
 
             <div class="form-group">
                 <label for="agentName" class="col-sm-2 control-label">상담원 이름</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control input-large" name="agentName" id="agentName" placeholder="이름" required>
+                    <input type="text" class="form-control input-large" name="agentName" id="agentName"
+                           th:value="*{agentName}" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="agentId" class="col-sm-2 control-label">상담원 ID</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control input-large" name="agentId" id="agentId" placeholder="아이디" required>
+                    <input type="text" class="form-control input-large" name="agentId" id="agentId"
+                           th:value="*{agentId}" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="password" class="col-sm-2 control-label">비밀번호</label>
                 <div class="col-sm-10">
-                    <input type="password" class="form-control input-large" name="password" id="password" placeholder="Password" data-minlength="6" required>
+                    <input type="password" class="form-control input-large" name="password" id="password"
+                           data-minlength="6" th:value="*{password}" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="agentNum" class="col-sm-2 control-label">상담원 사번</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control input-large" name="agentNum" id="agentNum" placeholder="사원번호" required>
+                    <input type="number" class="form-control input-large" name="agentNum" id="agentNum"
+                           th:value="*{agentNum}" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="part" class="col-sm-2 control-label">부서</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control input-large" name="part" id="part" placeholder="부서" required>
+                    <input type="text" class="form-control input-large" name="part" id="part" th:value="*{part}"
+                           required>
                 </div>
             </div>
 
             <div class="form-group">
 <!--                <label for="level" class="col-sm-2 control-label">권한</label>-->
 <!--                <div class="col-sm-10">-->
-<!--                    <input type="text" class="form-control input-large" name="level" id="level" placeholder="권한" required>-->
+<!--                    <input type="text" class="form-control input-large" name="level" id="level" th:value="*{roles}"-->
+<!--                           required>-->
 <!--                </div>-->
-
                 <div class="form-group">
-                    <label for="level" class="col-sm-2 control-label">권한</label>
+                    <label for="roles" class="col-sm-2 control-label">권한</label>
                     <div class="col-sm-10" th:each="role: ${roleList}">
-                        <input th:type="checkbox" name="level" id="level"
+                        <input th:type="checkbox" name="roles" id="roles"
                                th:text="${role.roleName}"
                                th:value="${role.roleName}"
-                              />
+                               th:checked="${account.roles.contains(role.roleName)} ? 'true' : 'false'"/>
                     </div>
                 </div>
 
@@ -62,14 +68,14 @@
 
             <div class="form-group">
                 <label for="agentCallNum" class="col-sm-2 control-label">전화번호</label>
-               <div class="col-sm-10">
-                    <input type="text" class="form-control input-large" name="agentCallNum" id="agentCallNum" placeholder="전화번호" required>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control input-large" name="agentCallNum" id="agentCallNum" th:value="*{agentCallNum}" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-offset-1 col-sm-10">
-                    <button type="Submit" class="btn btn-dark btn-lg">계정생성</button>
+                    <button type="Submit" class="btn btn-dark btn-lg">수정하기</button>
                     <a class="btn btn-dark btn-lg" th:href="@{/admin/accountList}">목록 </a>
                 </div>
             </div>

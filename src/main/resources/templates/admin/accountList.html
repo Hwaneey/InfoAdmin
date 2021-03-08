@@ -15,7 +15,7 @@
 							<ul class="pagination justify-content-center">
 
 								<li class="page-item" th:classappend="${!accountPage.hasPrevious()}? disabled">
-									<a th:href="@{'/admin' +  '/accounts?' + 'desc&page=' + ${accountPage.getNumber() - 1}}"
+									<a th:href="@{'/admin' +  '/accountList?' + 'desc&page=' + ${accountPage.getNumber() - 1}}"
 									   class="page-link" tabindex="-1" aria-disabled="true">
 										Previous
 									</a>
@@ -23,12 +23,12 @@
 
 								<li class="page-item" th:classappend="${i == accountPage.getNumber()}? active"
 									th:each="i: ${#numbers.sequence(0, accountPage.getTotalPages() - 1)}">
-									<a th:href="@{'/admin' +  '/accounts?' + 'desc&page=' + ${i}}"
+									<a th:href="@{'/admin' +  '/accountList?' + 'desc&page=' + ${i}}"
 									   class="page-link" href="#" th:text="${i + 1}">1</a>
 								</li>
 
 								<li class="page-item" th:classappend="${!accountPage.hasNext()}? disabled">
-									<a th:href="@{'/admin' +  '/accounts?' + 'desc&page=' + ${accountPage.getNumber() + 1}}"
+									<a th:href="@{'/admin' +  '/accountList?' + 'desc&page=' + ${accountPage.getNumber() + 1}}"
 									   class="page-link">
 										Next
 									</a>
@@ -57,11 +57,12 @@
 					<tbody>
 					<tr class="link_btn hover" th:each="accounts: ${accountPage}">
 
-						<td style="text-align: left;">
-							<a><span th:text="${accounts.agentId}">회원</span></a>
+						<td>
+							<a th:href="@{'/admin/accountUpdate/' + ${accounts.id}}"><span th:text="${accounts.agentId}">회원</span></a>
+<!--							<a><span th:text="${accounts.agentId}">회원</span></a>-->
 						</td>
 
-						<td style="text-align: left;" th:text="${accounts.agentNum}">
+						<td  th:text="${accounts.agentNum}">
 						</td>
 
 						<td class="date-time" style="text-align: left;" th:text="${accounts.agentName}">

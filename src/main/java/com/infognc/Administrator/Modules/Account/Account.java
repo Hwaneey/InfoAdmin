@@ -2,6 +2,7 @@ package com.infognc.Administrator.Modules.Account;
 
 import com.infognc.Administrator.Modules.Role.Role;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -16,24 +17,22 @@ public class Account {
     @Column(name = "account_id")
     private Long id;
 
-    @Column(length = 8)
     private String agentNum;
 
-    @Column(length = 10, unique = true)
+    @Column(unique = true)
     private String agentId;
 
-    @Column(length = 10)
     private String agentName;
 
     private String password;
 
     private String part;
 
-    private String level;
+    private String level ="3";
 
     private String agentCallNum;
 
-    private String status;
+    private String status = "1";
 
     private LocalDateTime regDate;
 
@@ -41,7 +40,7 @@ public class Account {
 
     private LocalDateTime pwDate;
 
-    private String delFlag;
+    private String delFlag = "N";
 
     @ManyToMany(fetch = FetchType.LAZY, cascade={CascadeType.ALL})
     @JoinTable(

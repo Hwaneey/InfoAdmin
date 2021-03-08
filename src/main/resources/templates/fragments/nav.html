@@ -12,7 +12,7 @@
             <li class="nav-item active">
                 <a class="navbar-brand mb-0 h1" href="/">Infogence <span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item" sec:authorize="isAuthenticated()">
+            <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
                 <a class="nav-link" th:href="@{/admin/accountList}">관리자 페이지</a>
             </li>
         </ul>

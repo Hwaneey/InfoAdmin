@@ -25,6 +25,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
     implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+
+    implementation 'org.hibernate.validator:hibernate-validator:6.1.2.Final'
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
@@ -35,7 +38,6 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.7'
-
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
 }
 
