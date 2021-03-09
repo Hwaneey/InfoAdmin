@@ -13,7 +13,10 @@
                 <a class="navbar-brand mb-0 h1" href="/">Infogence <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
-                <a class="nav-link" th:href="@{/admin/accountList}">관리자 페이지</a>
+                <a class="nav-link" th:href="@{/admin/accountList}">계정관리</a>
+            </li>
+            <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
+                <a class="nav-link"th:href="@{/counsel/counselList}">상담관리</a>
             </li>
         </ul>
 

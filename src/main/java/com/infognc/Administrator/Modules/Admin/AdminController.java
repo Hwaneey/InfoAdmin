@@ -15,9 +15,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,27 +24,34 @@ import java.util.List;
 public class AdminController {
 
     private final AccountRepository accountRepository;
-    private final AccountService accountService;
     private final ModelMapper modelMapper;
     private final AdminService adminService;
     private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/admin/accountList")
     public String getUsers(Model model,
-                           @PageableDefault(size = 10,direction = Sort.Direction.DESC) Pageable pageable){
+                           @PageableDefault(size = 10, direction = Sort.Direction.DESC) Pageable pageable) {
 
         List<Account> accounts = accountRepository.findAll();
         Page<Account> accountPage = accountRepository.findAll(pageable);
 
-        model.addAttribute("accountPage",accountPage);
-        model.addAttribute("accounts",accounts);
+        model.addAttribute("accountPage", accountPage);
+        model.addAttribute("accounts", accounts);
 
         return "admin/accountList";
     }
 
+    @GetMapping("/admin/search")
+    public String search(@RequestParam(value = "keyword") String keyword, Model model,
+                         @PageableDefault(size = 10, direction = Sort.Direction.DESC) Pageable pageable) {
+
+        List<Account> accountPage = accountRepository.findByAgentIdContaining(keyword);
+        model.addAttribute("accountPage", accountPage);
+        return "admin/accountSearch";
+    }
 
     @GetMapping("/admin/accountRegister")
-    public String registerUser(Model model){
+    public String getRegisterUser(Model model) {
 
         List<Role> roleList = adminService.getRoles();
 
@@ -56,7 +61,7 @@ public class AdminController {
 
 
     @PostMapping("/accountRegister")
-    public String registerUser(AdminRegisterForm adminRegisterForm){
+    public String registerUser(AdminRegisterForm adminRegisterForm) {
 
         Account account = modelMapper.map(adminRegisterForm, Account.class);
         account.setPassword(passwordEncoder.encode(adminRegisterForm.getPassword()));
@@ -66,19 +71,19 @@ public class AdminController {
     }
 
     @GetMapping("/admin/accountUpdate/{id}")
-    public String getUpdateUser(@PathVariable(value = "id") Long id, Model model){
+    public String getUpdateUser(@PathVariable(value = "id") Long id, Model model) {
 
         AdminRegisterForm adminRegisterForm = adminService.getUser(id);
         List<Role> roleList = adminService.getRoles();
 
-        model.addAttribute("account",adminRegisterForm);
-        model.addAttribute("roleList",roleList);
+        model.addAttribute("account", adminRegisterForm);
+        model.addAttribute("roleList", roleList);
 
         return "admin/accountUpdate";
     }
 
     @PostMapping("/admin/accountUpdate")
-    public String updateUser(AdminRegisterForm adminRegisterForm){
+    public String updateUser(AdminRegisterForm adminRegisterForm) {
 
         adminService.updateUser(adminRegisterForm);
 

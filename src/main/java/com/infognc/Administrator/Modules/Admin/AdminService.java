@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,12 +36,6 @@ public class AdminService {
         return roleRepository.findAll();
     }
 
-//    @Transactional
-//    public List<Account> getUser() {
-//        return accountRepository.findAll();
-//
-//    }
-
     @Transactional
     public AdminRegisterForm getUser(Long id) {
 
@@ -58,7 +53,7 @@ public class AdminService {
 
     @Transactional
     public void createUser(Account account, String level) {
-        Role role = roleRepository.findByRoleName(level);
+        Role role = roleRepository.findByRoleName("ROLE_CONSULTANT");
         roles.add(role);
         account.setUserRoles(roles);
         account.setRegDate(LocalDateTime.now());
@@ -85,5 +80,29 @@ public class AdminService {
         }
         accountRepository.save(accounts);
     }
+
+//    @Transactional
+//    public List<Account> search(String keyword) {
+//        List<Account> accounts = accountRepository.findByAgentIdContaining(keyword);
+//        List<BoardDto> boardDtoList  = new ArrayList<>();
+//
+//        if (boardEntities.isEmpty()) return boardDtoList;
+//
+//        for (BoardEntity boardEntity : boardEntities) {
+//            boardDtoList.add(this.convertEntityToDto(boardEntity));
+//        }
+//
+//        return boardDtoList;
+//    }
+//
+//    private BoardDto convertEntityToDto(BoardEntity boardEntity) {
+//        return BoardDto.builder()
+//                .id(boardEntity.getId())
+//                .title(boardEntity.getTitle())
+//                .content(boardEntity.getContent())
+//                .writer(boardEntity.getWriter())
+//                .createdDate(boardEntity.getCreatedDate())
+//                .build();
+//    }
 
 }

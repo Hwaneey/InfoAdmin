@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head">
+    <meta charset="UTF-8">
+    <title>HelloWorld</title>
+</head>
+<body>
+<div th:replace="/fragments/nav :: main-nav"></div>
+<br/>
+
+<div>
+    &nbsp
+    <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+        검색조건 입력
+    </button>
+    <a> 검색을 시작하시려면 펼쳐주세요. (기본검색 설정 : 당일 모든 통화)</a>
+    <div class="container">
+        <div class="row">
+            <form class="dropdown-menu row" action="/admin/search" method="GET">
+
+                <div class="col">
+                    <label for="name">상담원 이름</label>
+                    <input type="text" id="name" name="keyword" class="form-control" placeholder="상담원이름을 입력해주세요">
+                </div>
+                <br>
+                <button class="btn btn-primary col-sm">Search!</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<br/>
+<br/>
+<br/>
+
+<table class="table table-hover">
+    <thead>
+    <tr class="thead">
+        <th scope="col">청취</th>
+        <th scope="col">상담원사번</th>
+        <th scope="col">상담원이름</th>
+        <th scope="col">고객이름</th>
+        <th scope="col">고객번호</th>
+        <th scope="col">통화유형</th>
+        <th scope="col">통화구분</th>
+        <th scope="col">전화번호</th>
+        <th scope="col">통화시간</th>
+        <th scope="col">통화타임</th>
+        <th scope="col">링타임</th>
+        <th scope="col">발신번호</th>
+        <th scope="col">수신번호</th>
+        <th scope="col">녹취키</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <tr class="link_btn hover">
+
+        <td>▶
+        </td>
+
+        <td>66666
+        </td>
+
+        <td>김상담
+        </td>
+
+        <td>김고객
+        </td>
+
+        <td>77777
+        </td>
+
+        <td>발신
+        </td>
+
+        <td>미접촉
+        </td>
+
+        <td>01077777777
+        </td>
+
+        <td>2021-03-03 오후 5:29
+        </td>
+
+        <td>15
+        </td>
+
+        <td>5
+        </td>
+
+        <td>01066666666
+        </td>
+
+        <td>01077777777
+        </td>
+
+        <td>20210303172941359_01077777777
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+
