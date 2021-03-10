@@ -1,9 +1,11 @@
 package com.infognc.Administrator.Infra.Config;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
@@ -21,9 +23,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login").permitAll();
 
         http.logout()
-                .logoutSuccessUrl("/");
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login");
     }
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .mvcMatchers("/node_modules/**")
+                .antMatchers("/favicon.ico", "/resources/**", "/error")
+                .requestMatchers(PathRequest
+                        .toStaticResources()
+                        .atCommonLocations());
+    }
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();

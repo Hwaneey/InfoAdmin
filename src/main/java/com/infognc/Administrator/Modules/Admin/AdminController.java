@@ -5,6 +5,7 @@ import com.infognc.Administrator.Infra.Config.SecurityConfig;
 import com.infognc.Administrator.Modules.Account.Account;
 import com.infognc.Administrator.Modules.Account.AccountRepository;
 import com.infognc.Administrator.Modules.Account.AccountService;
+import com.infognc.Administrator.Modules.Account.UserSpecification;
 import com.infognc.Administrator.Modules.Role.Role;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -18,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -42,12 +44,20 @@ public class AdminController {
     }
 
     @GetMapping("/admin/search")
-    public String search(@RequestParam(value = "keyword") String keyword, Model model,
-                         @PageableDefault(size = 10, direction = Sort.Direction.DESC) Pageable pageable) {
+    public String search(@RequestParam(value = "agentId") String agentId, Model model) {
 
-        List<Account> accountPage = accountRepository.findByAgentIdContaining(keyword);
+        List<Account> accountPage = accountRepository.findByAgentIdContaining(agentId);
         model.addAttribute("accountPage", accountPage);
         return "admin/accountSearch";
+    }
+
+    @GetMapping("/test/search")
+    public String testSearch(@PageableDefault(size = 10, direction = Sort.Direction.DESC) Pageable pageable
+            , Map filter, Model model) {
+
+        Page<Account> accountPage = accountRepository.findAll(UserSpecification.searchUser(filter),pageable);
+        model.addAttribute("accountPage", accountPage);
+        return "test/accountSearch";
     }
 
     @GetMapping("/admin/accountRegister")

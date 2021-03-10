@@ -28,13 +28,14 @@ public class AdminService {
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
-    private final Set<Role> roles = new HashSet<>();
+//    private final Set<Role> roles = new HashSet<>();
 
 
     @Transactional
     public List<Role> getRoles() {
         return roleRepository.findAll();
     }
+
 
     @Transactional
     public AdminRegisterForm getUser(Long id) {
@@ -51,14 +52,17 @@ public class AdminService {
         return adminRegisterForm;
     }
 
+
     @Transactional
     public void createUser(Account account, String level) {
-        Role role = roleRepository.findByRoleName("ROLE_CONSULTANT");
+        Set<Role> roles = new HashSet<>();
+        Role role = roleRepository.findByRoleName(level);
         roles.add(role);
         account.setUserRoles(roles);
         account.setRegDate(LocalDateTime.now());
         accountRepository.save(account);
     }
+
 
     @Transactional
     public void updateUser(AdminRegisterForm adminRegisterForm){
@@ -81,28 +85,5 @@ public class AdminService {
         accountRepository.save(accounts);
     }
 
-//    @Transactional
-//    public List<Account> search(String keyword) {
-//        List<Account> accounts = accountRepository.findByAgentIdContaining(keyword);
-//        List<BoardDto> boardDtoList  = new ArrayList<>();
-//
-//        if (boardEntities.isEmpty()) return boardDtoList;
-//
-//        for (BoardEntity boardEntity : boardEntities) {
-//            boardDtoList.add(this.convertEntityToDto(boardEntity));
-//        }
-//
-//        return boardDtoList;
-//    }
-//
-//    private BoardDto convertEntityToDto(BoardEntity boardEntity) {
-//        return BoardDto.builder()
-//                .id(boardEntity.getId())
-//                .title(boardEntity.getTitle())
-//                .content(boardEntity.getContent())
-//                .writer(boardEntity.getWriter())
-//                .createdDate(boardEntity.getCreatedDate())
-//                .build();
-//    }
 
 }
