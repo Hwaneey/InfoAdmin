@@ -1,11 +1,80 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/fragments/head :: head">
     <meta charset="UTF-8">
     <title>HelloWorld</title>
+
 </head>
 <body>
 <div th:replace="/fragments/nav :: main-nav"></div>
+<section class="jumbotron text-center">
+    <div class="container">
+        <!-- Main jumbotron for a primary marketing message or call to action -->
+        <div class="jumbotron text-center">
+            <div class="container">
+                <h1>안녕하세요, 인포전스 입니다!</h1>
+                <p>최고의 인재들이 모여 차세대 최첨단 기술을 확보하고 컨택센터 구축 및 솔루션 개발의 내재역량을 강화하여 고객들의 편리한 콜센터 운영 및 이익 창출에 기여하는 Contact Center IT Service 전문기업으로서의 도약을 준비합니다.</p>
+                <p><a class="btn btn-primary btn-lg"  sec:authorize="!isAuthenticated()" href="/login" role="button">관리자 로그인 &raquo;</a></p>
+                <a class="btn btn-primary btn-lg" role="button" sec:authorize="isAuthenticated()" th:href="@{/admin/accountList}">관리자페이지</a>
+            </div>
+        </div>
+        <hr>
+
+        <div >
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="col">
+                    <h2><b>I </b>nsight</h2>
+                    <p> 경계를 넘어 그 이상의 가치를 발견하는 인재 </p>
+                </div>
+                <div class="col">
+                    <h2><b>N </b>etwork</h2>
+                    <p> 고객과 함께 호흡하고 소통하는 인재</p>
+                </div>
+                <div class="col">
+                    <h2><b>F </b>rienship</h2>
+                    <p>협력을 통해 시너지를 창출하는 인재</p>
+                </div>
+                <div class="col">
+                    <h2><b>O </b>penness</h2>
+                    <p>다양성을 존중하고 열린 마인드를 갖춘 인재</p>
+                </div>
+            </div>
+
+            <br>
+
+            <div class="row">
+                <div class="col-sm-3">
+                    <h2><b>G </b>lobal</h2>
+                    <p> 세계를 무대로 성과를 만들어가는 인재 </p>
+                </div>
+                <div class="col-sm-3">
+                    <h2><b>E </b>nergy</h2>
+                    <p>한계에 도전하는 용기와 추진력을 가진 인재 </p>
+                </div>
+                <div class="col-sm-3">
+                    <h2><b>C </b>reative</h2>
+                    <p>통념을 깨뜨리는 새로운 생각과 행동을 창조하는 인재</p>
+                </div>
+                <div class="col-sm-3">
+                    <h2><b>E </b>ffort</h2>
+                    <p>항상 겸손한 자세로 노력하고 배려하는 인재</p>
+                </div>
+            </div>
+            <hr>
+
+        <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <footer>
+                <p>&copy; Infogence 2013</p>
+            </footer>
+        </div>
+    </div>
+</section>
 </body>
 </html>

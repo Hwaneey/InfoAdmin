@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/fragments/head :: head">
 
 </head>
@@ -6,11 +7,17 @@
 <body>
 <div th:replace="/fragments/nav :: main-nav"></div>
 
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" th:href="@{/admin/accountList}">계정관리</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" th:href="@{/counsel/counselList}">상담관리</a>
+    </li>
+</ul>
+
 <div class="col-xs-10">
     <br>
-    <div>
-        <h1>계정관리</h1>&nbsp&nbsp
-    </div>
     <div>
         <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
@@ -65,18 +72,18 @@
             </form>
         </div>
     </div>
-    <br>
-    <div>
-        <form action="/admin/search" method="GET">
-            <div>&nbsp&nbsp
-                <div>
-                    <input type="text" id="name" name="agentId" class="form-control" placeholder="상담원아이디를 입력해주세요">
-                    <br>
-                    <button class="btn btn-primary col-sm">Search!</button>
-                </div>
-            </div>
-        </form>
-    </div>
+<!--    <br>-->
+<!--    <div>-->
+<!--        <form action="/admin/search" method="GET">-->
+<!--            <div>&nbsp&nbsp-->
+<!--                <div>-->
+<!--                    <input type="text" id="name" name="agentId" class="form-control" placeholder="상담원아이디를 입력해주세요">-->
+<!--                    <br>-->
+<!--                    <button class="btn btn-primary col-sm">Search!</button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
 
     <br>
     <table class="table">
@@ -146,11 +153,11 @@
     </table>
 
     <div class="row justify-content-center">
-        <div class="col-sm-2">
+        <div class="col">
             &nbsp <a class="btn btn-primary" th:href="@{/admin/accountRegister}">회원 등록</a></p>
         </div>
 
-        <div class="col-sm-10">
+        <div class="col-sm-12">
             <nav>
                 <ul class="pagination justify-content-center">
 

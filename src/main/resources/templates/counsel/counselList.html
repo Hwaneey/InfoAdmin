@@ -7,13 +7,19 @@
 </head>
 <body>
 <div th:replace="/fragments/nav :: main-nav"></div>
+
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link" aria-current="page" th:href="@{/admin/accountList}">계정관리</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" th:href="@{/counsel/counselList}">상담관리</a>
+    </li>
+</ul>
+
+
 <br/>
 <div>
-    <h1>상담관리</h1>
-    &nbsp&nbsp
-</div>
-<div>
-    &nbsp
     <div>
         <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">

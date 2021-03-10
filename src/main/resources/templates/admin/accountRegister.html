@@ -3,6 +3,15 @@
 <body>
 <div th:replace="/fragments/nav :: main-nav"></div>
 
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" th:href="@{/admin/accountList}">계정관리</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" th:href="@{/counsel/counselList}">상담관리</a>
+    </li>
+</ul>
+
 <div class="container d-flex justify-content-center">
     <div style="width:700px; margin-top: 30px;">
         <form class="form-horizontal" th:action="@{/accountRegister}" method="post">
