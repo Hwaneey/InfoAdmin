@@ -11,12 +11,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CounselController {
 
-    private final CounselRepository counselRepository;
+    private final CounselService counselService;
 
     @GetMapping("/counsel/counselList")
     public String getCounselList(Model model){
 
-        List<Counsel> counsel = counselRepository.findAll();
+        List<Counsel> counsel = counselService.getCounsel();
 
         model.addAttribute("counsel",counsel);
 

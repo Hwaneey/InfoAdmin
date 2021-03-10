@@ -60,9 +60,10 @@
     </thead>
 
     <tbody>
-    <tr class="link_btn hover">
+    <tr class="link_btn hover" th:each="counsel: ${counsel}">
 
-        <td>▶
+<!--        <td th:text="${counsel.recNum}">▶-->
+        <td th:text="${counsel.recNum}">▶
         </td>
 
         <td>66666

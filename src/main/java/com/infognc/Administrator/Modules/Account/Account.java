@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 @ToString(exclude = {"userRoles"})
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = "id") @Table(name = "account_list")
 @Entity @Getter @Setter @NoArgsConstructor @AllArgsConstructor @Builder
 public class Account {
 
