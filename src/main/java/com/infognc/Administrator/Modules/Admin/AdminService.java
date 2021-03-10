@@ -28,7 +28,6 @@ public class AdminService {
     private final RoleRepository roleRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
-//    private final Set<Role> roles = new HashSet<>();
 
 
     @Transactional

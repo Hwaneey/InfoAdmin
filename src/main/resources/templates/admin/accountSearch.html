@@ -32,7 +32,8 @@
                         <input type="text" id="agentName" name="agentName" class="form-control" placeholder="상담원이름">
                         <br>
                         <label for="agentCallNum">상담원전화번호</label>
-                        <input type="text" id="agentCallNum" name="agentCallNum" class="form-control" placeholder="상담원전화번호">
+                        <input type="text" id="agentCallNum" name="agentCallNum" class="form-control"
+                               placeholder="상담원전화번호">
                     </div>
 
                     <div class="col">
@@ -45,11 +46,14 @@
 
                     <div class="col">
                         <label for="noConnectOneMonth">1개월이상 미접속</label>
-                        <input type="text" id="noConnectOneMonth" name="noConnectOneMonth" class="form-control" placeholder="1개월 이상 미접속">
+                        <input type="text" id="noConnectOneMonth" name="noConnectOneMonth" class="form-control"
+                               placeholder="1개월 이상 미접속">
                         <br>
                         <label for="try3Password">비밀번호 3회 오류</label>
-                        <input type="text" id="try3Password" name="try3Password" class="form-control" placeholder="상담원번호">
-                    </div>&nbsp&nbsp&nbsp
+                        <input type="text" id="try3Password" name="try3Password" class="form-control"
+                               placeholder="상담원번호">
+                    </div>
+                    &nbsp&nbsp&nbsp
                 </div>
                 <br>
                 <button class="btn btn-primary col">Search!</button>
@@ -79,35 +83,40 @@
             <td>
                 <a th:href="@{'/admin/accountUpdate/' + ${accounts.id}}"><span
                         th:text="${accounts.agentId}">회원</span></a>
-                <!--							<a><span th:text="${accounts.agentId}">회원</span></a>-->
             </td>
 
             <td th:text="${accounts.agentNum}">
             </td>
 
-            <td class="date-time" style="text-align: left;" th:text="${accounts.agentName}">
+            <td style="text-align: left;" th:text="${accounts.agentName}">
             </td>
 
-            <td class="date-time" style="text-align: left;" th:text="${accounts.part}">
+            <td style="text-align: left;" th:text="${accounts.part}">
             </td>
 
-            <td style="text-align: left;">
+            <td>
 							<span th:each="role,iter : ${accounts.userRoles}">
 								<h6 th:text="${role.roleDesc}"></h6>
 							</span>
             </td>
 
-            <td class="date-time" style="text-align: left;" th:text="${accounts.status}">
-            </td>
+            <td th:if="${accounts.status} == '0'">미접속</td>
+            <td th:if="${accounts.status} == '1'">접속</td>
+            <td th:if="${accounts.status} == '2'">업무대기</td>
+            <td th:if="${accounts.status} == '3'">통화중</td>
+            <td th:if="${accounts.status} == '4'">휴식</td>
 
-            <td class="date-time" style="text-align: left;" th:text="${accounts.agentCallNum}">
+            <td th:text="${accounts.agentCallNum}">
             </td>
 
             <td class="date-time" style="text-align: left;" th:text="${accounts.lastDate}">
             </td>
 
-            <td class="date-time" style="text-align: left;" th:text="${accounts.delFlag}">
-            </td>
+            <td th:if="${accounts.delFlag} == 'N'">초기진행</td>
+            <td th:if="${accounts.delFlag} == 'Y'">종료</td>
+            <td th:if="${accounts.delFlag} == 'D'">상담완료</td>
+            <td th:if="${accounts.delFlag} == 'E'">기간만료</td>
+
         </tr>
         </tbody>
 
@@ -120,9 +129,33 @@
 </div>
 
 </body>
-<script type="text/javascript">
-    $(document).ready(function () {
-    });
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+<script type="application/javascript">
+    $(function () {
+        moment.locale('ko');
+        $(".date-time").text(function (index, dateTime) {
+            return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLL');
+        });
+        $(".date").text(function (index, dateTime) {
+            return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LL');
+        });
+        $(".weekday").text(function (index, dateTime) {
+            return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('dddd');
+        });
+        $(".time").text(function (index, dateTime) {
+            return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LT');
+        });
+        $(".calendar").text(function (index, dateTime) {
+            return moment(dateTime, "YYYY-MM-DD`T`hh:mm").calendar();
+        });
+        $(".fromNow").text(function (index, dateTime) {
+            return moment(dateTime, "YYYY-MM-DD`T`hh:mm").fromNow();
+        });
+        $(".date-weekday-time").text(function (index, dateTime) {
+            return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLLL');
+        });
+    })
 </script>
+
 </html>

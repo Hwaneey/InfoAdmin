@@ -14,30 +14,70 @@
 </div>
 <div>
     &nbsp
-    <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-        검색조건 입력
-    </button>
-    <a> 검색을 시작하시려면 펼쳐주세요. (기본검색 설정 : 당일 모든 통화)</a>
-    <div class="container">
-        <div class="row">
-            <form class="dropdown-menu row" action="/admin/search" method="GET">
+    <div>
+        <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+            검색조건 입력
+        </button>
+        <a> 검색을 시작하시려면 펼쳐주세요. (기본검색 설정 : 당일 모든 통화)</a>
+        <br>
+        <br>
 
-                <div class="col">
-                    <label for="name">상담원 이름</label>
-                    <input type="text" id="name" name="keyword" class="form-control" placeholder="상담원이름을 입력해주세요">
+        <div class="container dropdown-menu">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+            <form class="form-menu" action="/admin/search" method="GET">
+                <div class="row">&nbsp&nbsp&nbsp
+                    <div class="col">
+                        <label for="nowDay">당일</label>
+                        <input type="text" id="nowDay" name="nowDay" class="form-control" placeholder="">
+                        <br>
+                        <label for="date">날짜</label>
+                        <input type="text" id="date" name="date" class="form-control" placeholder="">
+                        <br>
+                        <label for="hour">시간</label>
+                        <input type="text" id="hour" name="hour" class="form-control" placeholder="">
+                    </div>
+
+                    <div class="col">&nbsp
+                        <label for="agentNum">상담원사번</label>
+                        <input type="text" id="agentNum" name="agentNum" class="form-control" placeholder="상담원사번">
+                        <br>
+                        <label for="agentName">통화유형</label>
+                        <input type="text" id="agentName" name="agentName" class="form-control" placeholder="통화유형">
+                        <br>
+                        <label for="agentCallNum">통화구분</label>
+                        <input type="text" id="agentCallNum" name="agentCallNum" class="form-control"
+                               placeholder="통화구분">
+                    </div>
+
+                    <div class="col">
+                        <label for="custNum">고객번호</label>
+                        <input type="text" id="custNum" name="custNum" class="form-control" placeholder="고객번호">
+                        <br>
+                        <label for="custName">고객이름</label>
+                        <input type="text" id="custName" name="custName" class="form-control" placeholder="고객이름">
+                        <br>
+                        <label for="custCallNum">고객전화번호</label>
+                        <input type="text" id="custCallNum" name="custCallNum" class="form-control" placeholder="고객전화번호">
+                    </div>
+
+                    <div class="col">
+                        <label for="sentCall">발신번호</label>
+                        <input type="text" id="sentCall" class="form-control"
+                               placeholder="발신번호">
+                        <br>
+                        <label for="receptionCall">수신번호</label>
+                        <input type="text" id="receptionCall" class="form-control"
+                               placeholder="수신번호">
+                    </div>
+                    &nbsp&nbsp&nbsp
                 </div>
                 <br>
-                <button class="btn btn-primary col-sm">Search!</button>
+                <button class="btn btn-primary col" disabled>Search!</button>
             </form>
         </div>
     </div>
 </div>
 
-
-<br/>
-<br/>
-<br/>
 
 <table class="table table-hover">
     <thead>
@@ -62,20 +102,22 @@
     <tbody>
     <tr class="link_btn hover" th:each="counsel: ${counsel}">
 
-<!--        <td th:text="${counsel.recNum}">▶-->
-        <td th:text="${counsel.recNum}">▶
+        <td>▶
         </td>
 
-        <td>66666
+        <td th:text="${counsel.agentNum}">66666
         </td>
+
+<!--        <td th:text="${counsel.agentName}">김상담-->
+<!--        </td>-->
 
         <td>김상담
         </td>
 
-        <td>김고객
+        <td th:text="${counsel.custName}">김고객
         </td>
 
-        <td>77777
+        <td th:text="${counsel.custNum}">77777
         </td>
 
         <td>발신
@@ -102,7 +144,7 @@
         <td>01077777777
         </td>
 
-        <td>20210303172941359_01077777777
+        <td th:text="${counsel.recNum}">20210303172941359_01077777777
         </td>
     </tr>
     </tbody>

@@ -51,14 +51,14 @@ public class AdminController {
         return "admin/accountSearch";
     }
 
-    @GetMapping("/test/search")
-    public String testSearch(@PageableDefault(size = 10, direction = Sort.Direction.DESC) Pageable pageable
-            , Map filter, Model model) {
-
-        Page<Account> accountPage = accountRepository.findAll(UserSpecification.searchUser(filter),pageable);
-        model.addAttribute("accountPage", accountPage);
-        return "test/accountSearch";
-    }
+//    @GetMapping("/test/search")
+//    public String testSearch(@PageableDefault(size = 10, direction = Sort.Direction.DESC) Pageable pageable
+//            , Map filter, Model model) {
+//
+//        Page<Account> accountPage = accountRepository.findAll(UserSpecification.searchUser(filter),pageable);
+//        model.addAttribute("accountPage", accountPage);
+//        return "test/accountSearch";
+//    }
 
     @GetMapping("/admin/accountRegister")
     public String getRegisterUser(Model model) {

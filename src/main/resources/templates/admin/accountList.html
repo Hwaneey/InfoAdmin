@@ -61,9 +61,21 @@
                     &nbsp&nbsp&nbsp
                 </div>
                 <br>
-                <button class="btn btn-primary col">Search!</button>
+                <button class="btn btn-primary col" disabled>Search!</button>
             </form>
         </div>
+    </div>
+    <br>
+    <div>
+        <form action="/admin/search" method="GET">
+            <div>&nbsp&nbsp
+                <div>
+                    <input type="text" id="name" name="agentId" class="form-control" placeholder="상담원아이디를 입력해주세요">
+                    <br>
+                    <button class="btn btn-primary col-sm">Search!</button>
+                </div>
+            </div>
+        </form>
     </div>
 
     <br>
@@ -88,7 +100,6 @@
             <td>
                 <a th:href="@{'/admin/accountUpdate/' + ${accounts.id}}"><span
                         th:text="${accounts.agentId}">회원</span></a>
-                <!--							<a><span th:text="${accounts.agentId}">회원</span></a>-->
             </td>
 
 
@@ -96,11 +107,11 @@
             </td>
 
 
-            <td class="date-time" style="text-align: left;" th:text="${accounts.agentName}">
+            <td style="text-align: left;" th:text="${accounts.agentName}">
             </td>
 
 
-            <td class="date-time" style="text-align: left;" th:text="${accounts.part}">
+            <td style="text-align: left;" th:text="${accounts.part}">
             </td>
 
 
@@ -111,14 +122,14 @@
             </td>
 
 
-            <td class="date-time" th:if="${accounts.status} == '0'">미접속</td>
-            <td class="date-time" th:if="${accounts.status} == '1'">접속</td>
-            <td class="date-time" th:if="${accounts.status} == '2'">업무대기</td>
-            <td class="date-time" th:if="${accounts.status} == '3'">통화중</td>
-            <td class="date-time" th:if="${accounts.status} == '4'">휴식</td>
+            <td th:if="${accounts.status} == '0'">미접속</td>
+            <td th:if="${accounts.status} == '1'">접속</td>
+            <td th:if="${accounts.status} == '2'">업무대기</td>
+            <td th:if="${accounts.status} == '3'">통화중</td>
+            <td th:if="${accounts.status} == '4'">휴식</td>
 
 
-            <td class="date-time" style="text-align: left;" th:text="${accounts.agentCallNum}">
+            <td th:text="${accounts.agentCallNum}">
             </td>
 
 
@@ -126,10 +137,10 @@
             </td>
 
 
-            <td class="date-time" th:if="${accounts.delFlag} == 'N'">초기진행</td>
-            <td class="date-time" th:if="${accounts.delFlag} == 'Y'">종료</td>
-            <td class="date-time" th:if="${accounts.delFlag} == 'D'">상담완료</td>
-            <td class="date-time" th:if="${accounts.delFlag} == 'E'">기간만료</td>
+            <td th:if="${accounts.delFlag} == 'N'">초기진행</td>
+            <td th:if="${accounts.delFlag} == 'Y'">종료</td>
+            <td th:if="${accounts.delFlag} == 'D'">상담완료</td>
+            <td th:if="${accounts.delFlag} == 'E'">기간만료</td>
         </tr>
         </tbody>
     </table>
@@ -138,6 +149,7 @@
         <div class="col-sm-2">
             &nbsp <a class="btn btn-primary" th:href="@{/admin/accountRegister}">회원 등록</a></p>
         </div>
+
         <div class="col-sm-10">
             <nav>
                 <ul class="pagination justify-content-center">
@@ -166,7 +178,36 @@
             </nav>
         </div>
     </div>
-</div>
 
+</div>
+<div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script type="application/javascript">
+        $(function () {
+            moment.locale('ko');
+            $(".date-time").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLL');
+            });
+            $(".date").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LL');
+            });
+            $(".weekday").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('dddd');
+            });
+            $(".time").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LT');
+            });
+            $(".calendar").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").calendar();
+            });
+            $(".fromNow").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").fromNow();
+            });
+            $(".date-weekday-time").text(function (index, dateTime) {
+                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLLL');
+            });
+        })
+    </script>
+</div>
 </body>
 </html>
