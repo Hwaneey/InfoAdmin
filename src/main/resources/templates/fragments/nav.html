@@ -3,7 +3,8 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="/head :: head">
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+          integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark" th:fragment="main-nav">
 
@@ -16,7 +17,7 @@
                 <a class="nav-link" th:href="@{/admin/accountList}">계정관리</a>
             </li>
             <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
-                <a class="nav-link"th:href="@{/counsel/counselList}">상담관리</a>
+                <a class="nav-link" th:href="@{/counsel/counselList}">상담관리</a>
             </li>
         </ul>
 
@@ -24,14 +25,16 @@
             <li class="nav-item">
                 <a class="nav-link" th:href="@{/login}" methods="post" sec:authorize="!isAuthenticated()">Login</a>
             </li>
-
-            <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post">
-                <button type="submit">로그아웃</button>
+            <a>Signed in as</a>
+                <strong sec:authentication="name">username</strong>
+            </li>
+            <form class="form-inline my-2 my-lg-0" sec:authorize="isAuthenticated()" th:action="@{/logout}"
+                  method="post">
+                <button class="btn btn-dark" type="submit">Logout</button>
             </form>
         </ul>
     </div>
 
 </nav>
 </body>
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </html>
