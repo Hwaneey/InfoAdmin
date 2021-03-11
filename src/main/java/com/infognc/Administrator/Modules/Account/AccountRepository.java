@@ -20,8 +20,6 @@ public interface AccountRepository extends JpaRepository<Account,Long>, JpaSpeci
 
     List<Account> findByAgentIdContaining(String keyword);
 
-//    List<Account> findByAgentIdContainingAndAgentCallNumAnd(String agentId, String status, String agentNum,
-//                                                            String agentName, String agentCallNum, String part, String level);
 
     Page<Account> findAll(@Nullable Specification<Account> spec, Pageable pageable);
 

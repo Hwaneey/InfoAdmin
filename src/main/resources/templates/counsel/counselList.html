@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/fragments/head :: head">
@@ -8,6 +8,7 @@
 <body>
 <div th:replace="/fragments/nav :: main-nav"></div>
 
+
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link" aria-current="page" th:href="@{/admin/accountList}">계정관리</a>
@@ -16,7 +17,6 @@
         <a class="nav-link active" th:href="@{/counsel/counselList}">상담관리</a>
     </li>
 </ul>
-
 
 <br/>
 <div>
@@ -155,7 +155,9 @@
     </tr>
     </tbody>
 </table>
-
+<footer class="text-center">
+    <p>&copy; Infogence 2013</p>
+</footer>
 </body>
 </html>
 

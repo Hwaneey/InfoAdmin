@@ -12,15 +12,32 @@ import java.util.List;
 public class CounselController {
 
     private final CounselService counselService;
+    private final CounselRepository counselRepository;
 
     @GetMapping("/counsel/counselList")
-    public String getCounselList(Model model){
+    public String getCounselList(Model model) {
 
         List<Counsel> counsel = counselService.getCounsel();
 
-        model.addAttribute("counsel",counsel);
+        model.addAttribute("counsel", counsel);
 
         return "counsel/counselList";
+    }
+
+    @GetMapping("/data")
+    public String getPageCounsel(Model model) {
+        List<Object[]> counsel = counselRepository.data();
+
+        model.addAttribute("counsel", counsel);
+
+        return "counsel/counselList";
+    }
+
+    @GetMapping("/test")
+    public String search(Model model) {
+
+
+        return "test/test";
     }
 
 }

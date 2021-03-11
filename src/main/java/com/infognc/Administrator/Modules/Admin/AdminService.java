@@ -68,6 +68,7 @@ public class AdminService {
         Account updateUser = accountRepository.findByAgentId(adminRegisterForm.getAgentId());
         Account accounts = modelMapper.map(adminRegisterForm,Account.class);
 
+
         if(adminRegisterForm.getRoles() != null){
             Set<Role> roles = new HashSet<>();
             adminRegisterForm.getRoles().forEach(role -> {
@@ -81,6 +82,9 @@ public class AdminService {
             accounts.setPassword(passwordEncoder.encode(adminRegisterForm.getPassword()));
             accounts.setPwDate(LocalDateTime.now());
         }
+
+        accounts.setLastDate(updateUser.getLastDate());
+
         accountRepository.save(accounts);
     }
 

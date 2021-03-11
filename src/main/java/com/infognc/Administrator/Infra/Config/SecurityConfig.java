@@ -16,8 +16,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                .mvcMatchers("/", "/login", "/sign-up").permitAll()
+                .mvcMatchers("/", "/login", "/sign-up","/api/**").permitAll()
                 .anyRequest().authenticated();
+
+        http.sessionManagement()
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true)
+                .expiredUrl("/duplicated-login");
 
         http.formLogin()
                 .loginPage("/login").permitAll();
