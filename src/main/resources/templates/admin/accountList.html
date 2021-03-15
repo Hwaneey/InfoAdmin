@@ -11,217 +11,252 @@
     <li class="nav-item">
         <a class="nav-link active" aria-current="page" th:href="@{/admin/accountList}">계정관리</a>
     </li>
-<!--    <li class="nav-item">-->
-<!--        <a class="nav-link" th:href="@{/counsel/counselList}">상담관리</a>-->
-<!--    </li>-->
+    <!--    <li class="nav-item">-->
+    <!--        <a class="nav-link" th:href="@{/counsel/counselList}">상담관리</a>-->
+    <!--    </li>-->
 
     <li class="nav-item">
         <a class="nav-link" href="http://192.168.1.206/adminlist.asp">상담관리</a>
     </li>
 </ul>
 
-<div class="col-xs-10">
-    <br>
-    <div>
-        <button type="button" class="btn btn-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-            검색조건 입력
-        </button>
-        <a> 검색을 시작하시려면 펼쳐주세요. (기본검색 설정 : 당일 모든 통화)</a>
-        <br>
-        <br>
+<div class="col-xs-10 ">
+    <br>&nbsp;
+    <strong>검색을 시작하시려면 펼쳐주세요. (기본검색 설정 : 당일 모든 통화)</strong>
+    <a href="#demo" class="btn  btn-primary" data-toggle="collapse">검색조건 입력</a>
+    <form id="demo" class="collapse" action="/admin/search" method="GET">
+        <div class="row">
+            <div>
+                <select class="form-control mt-2" id="selectToastPlacement" name="status">
+                    <option value="" selected>현재 상태를 입력해주세요</option>
+                    <option value="0">미접속</option>
+                    <option value="1">접속</option>
+                    <option value="2">업무대기</option>
+                    <option value="3">통화중</option>
+                    <option value="4">휴식</option>
+                </select>
+            </div>
 
-        <dt class="h5"> &nbsp 전체 회원 (<span th:text="${accounts.size()}"></span>)</dt>
-        <div class="container dropdown-menu">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
-            <form class="form-menu" action="/admin/search" method="GET">
-                <div class="row">&nbsp&nbsp&nbsp
-                    <div class="col">
-                        <label for="status">계정상태</label>
-                        <input type="text" id="status" name="status" class="form-control" placeholder="계정상태">
-                    </div>
-
-                    <div class="col">&nbsp
-                        <label for="agentNum">상담원사번</label>
-                        <input type="text" id="agentNum" name="agentNum" class="form-control" placeholder="상담원사번">
-                        <br>
-                        <label for="agentName">상담원이름</label>
-                        <input type="text" id="agentName" name="agentName" class="form-control" placeholder="상담원이름">
-                        <br>
-                        <label for="agentCallNum">상담원전화번호</label>
-                        <input type="text" id="agentCallNum" name="agentCallNum" class="form-control"
-                               placeholder="상담원전화번호">
-                    </div>
-
-                    <div class="col">
-                        <label for="part">부서</label>
-                        <input type="text" id="part" name="part" class="form-control" placeholder="부서">
-                        <br>
-                        <label for="level">권한</label>
-                        <input type="text" id="level" name="level" class="form-control" placeholder="권한">
-                    </div>
-
-                    <div class="col">
-                        <label for="noConnectOneMonth">1개월이상 미접속</label>
-                        <input type="text" id="noConnectOneMonth" class="form-control"
-                               placeholder="1개월 이상 미접속">
-                        <br>
-                        <label for="try3Password">비밀번호 3회 오류</label>
-                        <input type="text" id="try3Password" class="form-control"
-                               placeholder="상담원번호">
-                    </div>
-                    &nbsp&nbsp&nbsp
-                </div>
+            <div class="col-sm-2">
+                <input type="checkbox" onclick="enableDisable(this.checked, 'agentId')">
+                <input type="text" id="agentId" name="agentId" class="form-control" placeholder="상담원아이디를 입력해주세요"
+                       disabled>
                 <br>
-                <button class="btn btn-primary col" disabled>Search!</button>
-            </form>
+                <input type="checkbox" onclick="enableDisable(this.checked, 'agentCallNum')">
+                <input type="text" id="agentCallNum" name="agentCallNum" class="form-control"
+                       placeholder="상담원전화번호를 입력해주세요" disabled>
+                <br>
+                <input type="checkbox" onclick="enableDisable(this.checked, 'agentNum')">
+                <input type="text" id="agentNum" name="agentNum" class="form-control" placeholder="사번을 입력해주세요"
+                       disabled>
+            </div>
+
+            <!--            <div class="col-sm-2">-->
+            <!--                <input type="checkbox" onclick="enableDisable(this.checked, 'agentCallNum')">-->
+            <!--                <input type="text" id="agentCallNum" name="agentCallNum" class="form-control"-->
+            <!--                       placeholder="상담원전화번호를 입력해주세요" disabled>-->
+            <!--            </div>-->
+
+            <!--            <div class="col-sm-2">-->
+            <!--                <input type="checkbox" onclick="enableDisable(this.checked, 'agentNum')">-->
+            <!--                <input type="text" id="agentNum" name="agentNum" class="form-control" placeholder="사번을 입력해주세요"-->
+            <!--                       disabled>-->
+            <!--            </div>-->
+
+            <div class="col-sm-2">
+                <select class="form-control mt-2" id="part" name="part">
+                    <option value="" selected>부서를 선택해주세요</option>
+                    <option value="00">운영</option>
+                    <option value="01">1팀</option>
+                    <option value="02">2팀</option>
+                    <option value="03">3팀</option>
+                </select>
+                <br>
+                <select class="form-control mt-2" id="level" name="level">
+                    <option value="" selected>권항을 선택해주세요</option>
+                    <option value="0">관리자</option>
+                    <option value="1">중간관리자</option>
+                    <option value="2">QC</option>
+                    <option value="5">상담원</option>
+                </select>
+            </div>
+
+            <!--            <div class="col-sm-2">-->
+            <!--                <select class="form-control mt-2" id="level" name="level">-->
+            <!--                    <option value="" selected>권항을 선택해주세요</option>-->
+            <!--                    <option value="0">관리자</option>-->
+            <!--                    <option value="1">중간관리자</option>-->
+            <!--                    <option value="2">QC</option>-->
+            <!--                    <option value="5">상담원</option>-->
+            <!--                </select>-->
+            <!--            </div>-->
+            <button class="btn btn-primary col-sm-2">Search!</button>
         </div>
-    </div>
-<!--    <br>-->
-<!--    <div>-->
-<!--        <form action="/admin/search" method="GET">-->
-<!--            <div>&nbsp&nbsp-->
-<!--                <div>-->
-<!--                    <input type="text" id="name" name="agentId" class="form-control" placeholder="상담원아이디를 입력해주세요">-->
-<!--                    <br>-->
-<!--                    <button class="btn btn-primary col-sm">Search!</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </form>-->
-<!--    </div>-->
+
+    </form>
 
     <br>
-    <table class="table">
-        <thead>
-        <tr class="thead">
-            <th scope="col">아이디</th>
-            <th scope="col">사번</th>
-            <th scope="col">이름</th>
-            <th scope="col">부서</th>
-            <th scope="col">권한</th>
-            <th scope="col">업무상태</th>
-            <th scope="col">전화번호</th>
-            <th scope="col">마지막 접속 시간</th>
-            <th scope="col">계정상태</th>
-        </tr>
-        </thead>
 
-        <tbody>
-        <tr class="link_btn hover" th:each="accounts: ${accountPage}">
+    <div class="container">
+        <dt class="h5"> &nbsp 전체 회원 (<span th:text="${accounts.size()}"></span>)</dt>
 
-            <td>
-                <a th:href="@{'/admin/accountUpdate/' + ${accounts.id}}"><span
-                        th:text="${accounts.agentId}">회원</span></a>
-            </td>
+        <br>
+        <table class="table">
+            <thead>
+            <tr class="thead">
+                <th scope="col">아이디</th>
+                <th scope="col">사번</th>
+                <th scope="col">이름</th>
+                <th scope="col">부서</th>
+                <th scope="col">권한</th>
+                <th scope="col">업무상태</th>
+                <th scope="col">전화번호</th>
+                <th scope="col">마지막 접속 시간</th>
+                <th scope="col">계정상태</th>
+            </tr>
+            </thead>
 
+            <tbody>
+            <tr class="link_btn hover" th:each="accounts: ${accountPage}">
 
-            <td th:text="${accounts.agentNum}">
-            </td>
-
-
-            <td style="text-align: left;" th:text="${accounts.agentName}">
-            </td>
+                <td>
+                    <a th:href="@{'/admin/accountUpdate/' + ${accounts.id}}"><span
+                            th:text="${accounts.agentId}">회원</span></a>
+                </td>
 
 
-            <td style="text-align: left;" th:text="${accounts.part}">
-            </td>
+                <td th:text="${accounts.agentNum}">
+                </td>
 
 
-            <td style="text-align: left;">
-							<span th:each="role,iter : ${accounts.userRoles}">
-								<h6 th:text="${role.roleDesc}"></h6>
-							</span>
-            </td>
+                <td style="text-align: left;" th:text="${accounts.agentName}">
+                </td>
 
 
-            <td th:if="${accounts.status} == '0'">미접속</td>
-            <td th:if="${accounts.status} == '1'">접속</td>
-            <td th:if="${accounts.status} == '2'">업무대기</td>
-            <td th:if="${accounts.status} == '3'">통화중</td>
-            <td th:if="${accounts.status} == '4'">휴식</td>
+                <td th:if="${accounts.part} == '00'">운영</td>
+                <td th:if="${accounts.part} == '01'">1팀</td>
+                <td th:if="${accounts.part} == '02'">2팀</td>
+                <td th:if="${accounts.part} == '03'">3팀</td>
 
 
-            <td th:text="${accounts.agentCallNum}">
-            </td>
+                <td>
+				<span th:each="role,iter : ${accounts.userRoles}">
+					<h6 th:text="${role.roleDesc}"></h6>
+				</span>
+                </td>
 
 
-            <td class="fromNow" style="text-align: left;" th:text="${accounts.lastDate}">
-            </td>
+                <td th:if="${accounts.status} == '0'">미접속</td>
+                <td th:if="${accounts.status} == '1'">접속</td>
+                <td th:if="${accounts.status} == '2'">업무대기</td>
+                <td th:if="${accounts.status} == '3'">통화중</td>
+                <td th:if="${accounts.status} == '4'">휴식</td>
 
 
-            <td th:if="${accounts.delFlag} == 'N'">초기진행</td>
-            <td th:if="${accounts.delFlag} == 'Y'">종료</td>
-            <td th:if="${accounts.delFlag} == 'D'">상담완료</td>
-            <td th:if="${accounts.delFlag} == 'E'">기간만료</td>
-        </tr>
-        </tbody>
-    </table>
+                <td th:text="${accounts.agentCallNum}">
+                </td>
 
-    <div class="row justify-content-center">
-        <div class="col">
-            &nbsp <a class="btn btn-primary" th:href="@{/admin/accountRegister}">회원 등록</a></p>
+
+                <td class="date-weekday-time" th:text="${accounts.lastDate}">
+                </td>
+
+
+                <td th:if="${accounts.delFlag} == 'N'">초기진행</td>
+                <td th:if="${accounts.delFlag} == 'Y'">종료</td>
+                <td th:if="${accounts.delFlag} == 'D'">상담완료</td>
+                <td th:if="${accounts.delFlag} == 'E'">기간만료</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="row justify-content-center">
+            <div class="col">
+                &nbsp <a class="btn btn-primary" th:href="@{/admin/accountRegister}">회원 등록</a></p>
+            </div>
+
+            <div class="col-sm-12">
+                <nav>
+                    <ul class="pagination justify-content-center">
+
+                        <li class="page-item" th:classappend="${!accountPage.hasPrevious()}? disabled">
+                            <a th:href="@{'/admin' +  '/accountList?' + 'desc&page=' + ${accountPage.getNumber() - 1}}"
+                               class="page-link" tabindex="-1" aria-disabled="true">
+                                Previous
+                            </a>
+                        </li>
+
+                        <li class="page-item" th:classappend="${i == accountPage.getNumber()}? active"
+                            th:each="i: ${#numbers.sequence(0, accountPage.getTotalPages() - 1)}">
+                            <a th:href="@{'/admin' +  '/accountList?' + 'desc&page=' + ${i}}"
+                               class="page-link" href="#" th:text="${i + 1}">1</a>
+                        </li>
+
+                        <li class="page-item" th:classappend="${!accountPage.hasNext()}? disabled">
+                            <a th:href="@{'/admin' +  '/accountList?' + 'desc&page=' + ${accountPage.getNumber() + 1}}"
+                               class="page-link">
+                                Next
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+            </div>
         </div>
 
-        <div class="col-sm-12">
-            <nav>
-                <ul class="pagination justify-content-center">
-
-                    <li class="page-item" th:classappend="${!accountPage.hasPrevious()}? disabled">
-                        <a th:href="@{'/admin' +  '/accountList?' + 'desc&page=' + ${accountPage.getNumber() - 1}}"
-                           class="page-link" tabindex="-1" aria-disabled="true">
-                            Previous
-                        </a>
-                    </li>
-
-                    <li class="page-item" th:classappend="${i == accountPage.getNumber()}? active"
-                        th:each="i: ${#numbers.sequence(0, accountPage.getTotalPages() - 1)}">
-                        <a th:href="@{'/admin' +  '/accountList?' + 'desc&page=' + ${i}}"
-                           class="page-link" href="#" th:text="${i + 1}">1</a>
-                    </li>
-
-                    <li class="page-item" th:classappend="${!accountPage.hasNext()}? disabled">
-                        <a th:href="@{'/admin' +  '/accountList?' + 'desc&page=' + ${accountPage.getNumber() + 1}}"
-                           class="page-link">
-                            Next
-                        </a>
-                    </li>
-
-                </ul>
-            </nav>
-        </div>
     </div>
+    <div>
+        <script language="javascript">
+            function enableDisable(bEnable, textBoxID) {
+                document.getElementById(textBoxID).disabled = !bEnable
+            }
+        </script>
+        <script language="javascript">
+            $('.dropdown.keep-open').on({
+                "shown.bs.dropdown": function () {
+                    this.closable = false;
+                },
+                "click": function () {
+                    this.closable = true;
+                },
+                "hide.bs.dropdown": function () {
+                    return this.closable;
+                }
+            });
+        </script>
 
-</div>
-<div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script type="application/javascript">
-        $(function () {
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+
+        <script type="application/javascript">
             moment.locale('ko');
-            $(".date-time").text(function (index, dateTime) {
-                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLL');
-            });
-            $(".date").text(function (index, dateTime) {
-                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LL');
-            });
-            $(".weekday").text(function (index, dateTime) {
-                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('dddd');
-            });
-            $(".time").text(function (index, dateTime) {
-                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LT');
-            });
-            $(".calendar").text(function (index, dateTime) {
-                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").calendar();
-            });
-            $(".fromNow").text(function (index, dateTime) {
-                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").fromNow();
-            });
-            $(".date-weekday-time").text(function (index, dateTime) {
-                return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLLL');
-            });
-        })
-    </script>
+            $(function () {
+                $(".date-time").text(function (index, dateTime) {
+                    return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLL');
+                });
+                $(".date").text(function (index, dateTime) {
+                    return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LL');
+                });
+                $(".weekday").text(function (index, dateTime) {
+                    return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('dddd');
+                });
+                $(".time").text(function (index, dateTime) {
+                    return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LT');
+                });
+                $(".calendar").text(function (index, dateTime) {
+                    return moment(dateTime, "YYYY-MM-DD`T`hh:mm").calendar();
+                });
+                $(".fromNow").text(function (index, dateTime) {
+                    return moment(dateTime, "YYYY-MM-DD`T`hh:mm").fromNow();
+                });
+                $(".date-weekday-time").text(function (index, dateTime) {
+                    return moment(dateTime, "YYYY-MM-DD`T`hh:mm").format('LLLL');
+                });
+            })
+        </script>
+    </div>
+    <footer class="text-center">
+        <p>&copy; Infogence 2013</p>
+    </footer>
 </div>
-<footer class="text-center">
-    <p>&copy; Infogence 2013</p>
-</footer>
 </body>
 </html>

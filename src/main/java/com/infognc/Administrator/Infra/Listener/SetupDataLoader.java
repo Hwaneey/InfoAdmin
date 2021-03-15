@@ -41,10 +41,10 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
 
     private void setupSecurityResources() {
         Set<Role> roles = new HashSet<>();
-        Role adminRole = createRoleIfNotFound("ROLE_ADMIN", "관리자");
-        Role middleAdminRole = createRoleIfNotFound("ROLE_MIDDLE_ADMIN", "중간관리자");
-        Role qcRole = createRoleIfNotFound("ROLE_QC", "QC");
-        Role consultantRole = createRoleIfNotFound("ROLE_CONSULTANT", "상담원");
+        Role adminRole = createRoleIfNotFound("0", "관리자");
+        Role middleAdminRole = createRoleIfNotFound("1", "중간관리자");
+        Role qcRole = createRoleIfNotFound("2", "QC");
+        Role consultantRole = createRoleIfNotFound("5", "상담원");
 
         createRoleHierarchyIfNotFound(middleAdminRole, adminRole);
         createRoleHierarchyIfNotFound(qcRole, middleAdminRole);
@@ -67,8 +67,8 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
                     .agentId(userName)
                     .agentName("관리자")
                     .password(passwordConfig.passwordEncoder().encode(password))
-                    .part("관리자")
-                    .level("1")
+                    .part("00")
+                    .level("0")
                     .agentCallNum("01034263345")
                     .status("1")
                     .regDate(LocalDateTime.now())

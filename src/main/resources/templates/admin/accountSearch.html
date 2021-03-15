@@ -44,8 +44,7 @@
                         <input type="text" id="agentName" name="agentName" class="form-control" placeholder="상담원이름">
                         <br>
                         <label for="agentCallNum">상담원전화번호</label>
-                        <input type="text" id="agentCallNum" name="agentCallNum" class="form-control"
-                               placeholder="상담원전화번호">
+                        <input type="text" id="agentCallNum" name="agentCallNum" class="form-control" placeholder="상담원전화번호">
                     </div>
 
                     <div class="col">
@@ -58,12 +57,10 @@
 
                     <div class="col">
                         <label for="noConnectOneMonth">1개월이상 미접속</label>
-                        <input type="text" id="noConnectOneMonth" name="noConnectOneMonth" class="form-control"
-                               placeholder="1개월 이상 미접속">
+                        <input type="text" id="noConnectOneMonth" name="noConnectOneMonth" class="form-control" placeholder="1개월 이상 미접속">
                         <br>
                         <label for="try3Password">비밀번호 3회 오류</label>
-                        <input type="text" id="try3Password" name="try3Password" class="form-control"
-                               placeholder="상담원번호">
+                        <input type="text" id="try3Password" name="try3Password" class="form-control" placeholder="상담원번호">
                     </div>
                     &nbsp&nbsp&nbsp
                 </div>
@@ -134,10 +131,47 @@
 
     </table>
 
+<!--    <div class="row justify-content-center">-->
+<!--        <div class="col">-->
+<!--            &nbsp <a class="btn btn-primary" th:href="@{/admin/accountRegister}">회원 등록</a></p>-->
+<!--        </div>-->
+
+<!--        <div class="col-sm-12">-->
+<!--            <nav>-->
+<!--                <ul class="pagination justify-content-center">-->
+
+<!--                    <li class="page-item" th:classappend="${!accountPage.hasPrevious()}? disabled">-->
+<!--                        <a th:href="@{'/admin' +  '/accountSearch?' + 'desc&page=' + ${accountPage.getNumber() - 1}}"-->
+<!--                           class="page-link" tabindex="-1" aria-disabled="true">-->
+<!--                            Previous-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                    <li class="page-item" th:classappend="${i == accountPage.getNumber()}? active"-->
+<!--                        th:each="i: ${#numbers.sequence(0, accountPage.getTotalPages() - 1)}">-->
+<!--                        <a th:href="@{'/admin' +  '/accountSearch?' + 'desc&page=' + ${i}}"-->
+<!--                           class="page-link" href="#" th:text="${i + 1}">1</a>-->
+<!--                    </li>-->
+
+<!--                    <li class="page-item" th:classappend="${!accountPage.hasNext()}? disabled">-->
+<!--                        <a th:href="@{'/admin' +  '/accountSearch?' + 'desc&page=' + ${accountPage.getNumber() + 1}}"-->
+<!--                           class="page-link">-->
+<!--                            Next-->
+<!--                        </a>-->
+<!--                    </li>-->
+
+<!--                </ul>-->
+<!--            </nav>-->
+<!--        </div>-->
+<!--    </div>-->
+
     <div>
         &nbsp
         <a class="btn btn-primary" th:href="@{/admin/accountRegister}">회원 등록</a></p>
     </div>
+
+
+
 </div>
 <footer class="text-center">
     <p>&copy; Infogence 2013</p>

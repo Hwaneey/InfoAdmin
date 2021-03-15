@@ -1,11 +1,7 @@
 package com.infognc.Administrator.Modules.Admin;
 
-import com.infognc.Administrator.Infra.Config.PasswordConfig;
-import com.infognc.Administrator.Infra.Config.SecurityConfig;
 import com.infognc.Administrator.Modules.Account.Account;
 import com.infognc.Administrator.Modules.Account.AccountRepository;
-import com.infognc.Administrator.Modules.Account.AccountService;
-import com.infognc.Administrator.Modules.Account.UserSpecification;
 import com.infognc.Administrator.Modules.Role.Role;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -16,10 +12,12 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
@@ -44,21 +42,26 @@ public class AdminController {
     }
 
     @GetMapping("/admin/search")
-    public String search(@RequestParam(value = "agentId") String agentId, Model model) {
+    public String search(@RequestParam(value = "status", required = false, defaultValue = "") String status,
+                         @RequestParam(value = "agentId", required = false, defaultValue = "") String agentId,
+                         @RequestParam(value = "agentCallNum", required = false, defaultValue = "") String agentCallNum,
+                         @RequestParam(value = "agentNum", required = false, defaultValue = "") String agentNum,
+                         @RequestParam(value = "part", required = false, defaultValue = "") String part,
+                         @RequestParam(value = "level", required = false, defaultValue = "") String level,
+                         @PageableDefault(size = 10, direction = Sort.Direction.DESC) Pageable pageable, Model model) {
 
-        List<Account> accountPage = accountRepository.findByAgentIdContaining(agentId);
+        List<Account> accountPage =
+                accountRepository.findByStatusContainingAndAgentIdContainingAndAgentCallNumContainingAndAgentNumContainingAndPartContainingAndLevelContaining
+                (status, agentId, agentCallNum, agentNum, part, level);
+
+//        Page<Account> accountPage =
+//                accountRepository.findByStatusContainingAndAgentIdContainingAndAgentCallNumContainingAndAgentNumContainingAndPartContainingAndLevelContaining
+//                (status, agentId, agentCallNum, agentNum, part, level);
+
         model.addAttribute("accountPage", accountPage);
         return "admin/accountSearch";
     }
 
-//    @GetMapping("/test/search")
-//    public String testSearch(@PageableDefault(size = 10, direction = Sort.Direction.DESC) Pageable pageable
-//            , Map filter, Model model) {
-//
-//        Page<Account> accountPage = accountRepository.findAll(UserSpecification.searchUser(filter),pageable);
-//        model.addAttribute("accountPage", accountPage);
-//        return "test/accountSearch";
-//    }
 
     @GetMapping("/admin/accountRegister")
     public String getRegisterUser(Model model) {

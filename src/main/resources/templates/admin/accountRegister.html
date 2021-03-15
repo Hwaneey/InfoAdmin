@@ -23,45 +23,56 @@
             <div class="form-group">
                 <label for="agentName" class="col-sm-2 control-label">상담원 이름</label>
                 <div class="col-sm-10">
-                    <input type="text" th:value="테스트" class="form-control input-large" name="agentName" id="agentName" placeholder="이름" required>
+                    <input type="text" class="form-control input-large" name="agentName" id="agentName" placeholder="이름" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="agentId" class="col-sm-2 control-label">상담원 ID</label>
                 <div class="col-sm-10">
-                    <input type="text" th:value="test" class="form-control input-large" name="agentId" id="agentId" placeholder="아이디" required>
+                    <input type="text" class="form-control input-large" name="agentId" id="agentId" placeholder="아이디" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="password" class="col-sm-2 control-label">비밀번호</label>
                 <div class="col-sm-10">
-                    <input type="password"th:value="123" class="form-control input-large" name="password" id="password" placeholder="Password" data-minlength="6" required>
+                    <input type="password" class="form-control input-large" name="password" id="password" placeholder="Password" data-minlength="6" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="agentNum" class="col-sm-2 control-label">상담원 사번</label>
                 <div class="col-sm-10">
-                    <input type="number" th:value="789456" class="form-control input-large" name="agentNum" id="agentNum" placeholder="사원번호" required>
+                    <input type="number"  class="form-control input-large" name="agentNum" id="agentNum" placeholder="사원번호" required>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="part" class="col-sm-2 control-label">부서</label>
                 <div class="col-sm-10">
-                    <input type="text" th:value="개발팀" class="form-control input-large" name="part" id="part" placeholder="부서" required>
+                    <select class="form-control mt-2" id="part" name="part" required >
+                        <option value="" selected>부서를 선택해주세요</option>
+                        <option value="00">운영</option>
+                        <option value="01">1팀</option>
+                        <option value="02">2팀</option>
+                        <option value="03">3팀</option>
+                    </select>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="form-group">
                     <label for="level" class="col-sm-2 control-label">권한</label>
-                    <div class="col-sm-10" th:each="role: ${roleList}">
-                        <input th:type="checkbox" name="level" id="level"
-                               th:text="${role.roleName}"
-                               th:value="${role.roleName}"/>
+                    <div class="col-sm-10">
+                        <select class="form-control mt-2" id="level" name="level" required >
+                            <option value="" selected>권한을 선택해주세요</option>
+                            <option th:each="role : ${roleList}"
+                                    th:value="${role.roleName}"
+                                    th:utext="${role?.roleDesc}">
+                            </option>
+                        </select>
+
                     </div>
                 </div>
 
@@ -70,7 +81,7 @@
             <div class="form-group">
                 <label for="agentCallNum" class="col-sm-2 control-label">전화번호</label>
                <div class="col-sm-10">
-                    <input type="text" th:value="01034263345" class="form-control input-large" name="agentCallNum" id="agentCallNum" placeholder="전화번호" required>
+                    <input type="text"class="form-control input-large" name="agentCallNum" id="agentCallNum" placeholder="전화번호" required>
                 </div>
             </div>
 

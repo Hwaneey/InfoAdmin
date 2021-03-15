@@ -6,7 +6,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 @EqualsAndHashCode(of = "id")
 @Getter
 @Setter
