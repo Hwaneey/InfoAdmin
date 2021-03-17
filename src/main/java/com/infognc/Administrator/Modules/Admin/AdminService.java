@@ -63,21 +63,22 @@ public class AdminService {
 
 
     @Transactional
-    public void updateUser(AdminRegisterForm adminRegisterForm){
+    public void updateUser(AdminRegisterForm adminRegisterForm) {
         Account updateUser = accountRepository.findByAgentId(adminRegisterForm.getAgentId());
-        Account accounts = modelMapper.map(adminRegisterForm,Account.class);
+        Account accounts = modelMapper.map(adminRegisterForm, Account.class);
 
 
-        if(adminRegisterForm.getRoles() != null){
+        if (adminRegisterForm.getRoles() != null) {
             Set<Role> roles = new HashSet<>();
             adminRegisterForm.getRoles().forEach(role -> {
                 Role r = roleRepository.findByRoleName(role);
                 roles.add(r);
+                accounts.setLevel(role);
             });
             accounts.setUserRoles(roles);
         }
 
-        if(!adminRegisterForm.getPassword().equals(updateUser.getPassword())){
+        if (!adminRegisterForm.getPassword().equals(updateUser.getPassword())) {
             accounts.setPassword(passwordEncoder.encode(adminRegisterForm.getPassword()));
             accounts.setPwDate(LocalDateTime.now());
         }

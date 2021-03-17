@@ -2,6 +2,7 @@ package com.infognc.Administrator.Modules.Admin;
 
 import com.infognc.Administrator.Modules.Account.Account;
 import com.infognc.Administrator.Modules.Account.AccountRepository;
+import com.infognc.Administrator.Modules.Admin.Validator.AdminRegisterFormValidator;
 import com.infognc.Administrator.Modules.Role.Role;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -11,12 +12,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -29,6 +29,12 @@ public class AdminController {
     private final ModelMapper modelMapper;
     private final AdminService adminService;
     private final PasswordEncoder passwordEncoder;
+    private final AdminRegisterFormValidator adminRegisterFormValidator;
+
+    @InitBinder("adminRegisterForm")
+    public void initBinder(WebDataBinder webDataBinder) {
+        webDataBinder.addValidators(adminRegisterFormValidator);
+    }
 
     @GetMapping("/admin/accountList")
     public String getUsers(Model model,
@@ -67,15 +73,26 @@ public class AdminController {
         List<Role> roleList = adminService.getRoles();
 
         model.addAttribute("roleList", roleList);
+
+        model.addAttribute(new AdminRegisterForm());
+
         return "admin/accountRegister";
     }
 
 
     @PostMapping("/accountRegister")
-    public String registerUser(AdminRegisterForm adminRegisterForm) {
+    public String registerUser(@Valid AdminRegisterForm adminRegisterForm, Errors errors, Model model) {
+
+        if (errors.hasErrors()){
+            List<Role> roleList = adminService.getRoles();
+            model.addAttribute("roleList", roleList);
+            return "admin/accountRegister";
+        }
 
         Account account = modelMapper.map(adminRegisterForm, Account.class);
+
         account.setPassword(passwordEncoder.encode(adminRegisterForm.getPassword()));
+
         adminService.createUser(account, adminRegisterForm.getLevel());
 
         return "redirect:/admin/accountList";
@@ -94,10 +111,9 @@ public class AdminController {
     }
 
     @PostMapping("/admin/accountUpdate")
-    public String updateUser(AdminRegisterForm adminRegisterForm) {
+    public String updateUser(Account account,AdminRegisterForm adminRegisterForm, Model model, Errors errors) {
 
         adminService.updateUser(adminRegisterForm);
-
         return "redirect:/admin/accountList";
     }
 

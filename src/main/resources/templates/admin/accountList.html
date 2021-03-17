@@ -82,7 +82,6 @@
 
     <br>
 
-    <!--    <div class="container">-->
     <p>
         <dt class="h5"> &nbsp 전체 회원 (<span th:text="${accounts.size()}"></span>)</dt>
 
@@ -90,6 +89,7 @@
     <table class="table">
         <thead>
         <tr class="thead">
+            <th scope="col"></th>
             <th scope="col">아이디</th>
             <th scope="col">사번</th>
             <th scope="col">이름</th>
@@ -104,6 +104,16 @@
 
         <tbody>
         <tr class="link_btn hover" th:each="accounts: ${accountPage}">
+
+            <td>
+                <a th:href="@{#}"
+                   class="text-decoration-none">
+                    <svg data-jdenticon-value="nickname"
+                         th:data-jdenticon-value="${accounts.agentId}" width="24" height="24"
+                         class="rounded border bg-light"></svg>
+                    <!--                    <span th:text="${accounts.getUsername()}"></span>-->
+                </a>
+            </td>
 
             <td>
                 <a th:href="@{'/admin/accountUpdate/' + ${accounts.id}}"><span
@@ -196,7 +206,6 @@
             document.getElementById(textBoxID).disabled = !bEnable
         }
     </script>
-
 
 
     <script language="javascript">

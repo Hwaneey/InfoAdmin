@@ -33,11 +33,11 @@ public class CounselController {
         return "counsel/counselList";
     }
 
-    @GetMapping("/test")
-    public String search(Model model) {
-
-
-        return "test/test";
-    }
+//    @GetMapping("/test")
+//    public String search(Model model) {
+//
+//
+//        return "test/test";
+//    }
 
 }

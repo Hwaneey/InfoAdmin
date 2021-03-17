@@ -18,10 +18,10 @@
 
 <div class="container d-flex justify-content-center">
     <div style="width:700px; margin-top: 30px;">
-        <form class="form-horizontal" th:action="@{/accountRegister}" method="post">
+        <form class="form-horizontal" th:action="@{/accountRegister}" th:object="${adminRegisterForm}" method="post">
 
             <div class="form-group">
-                <label for="agentName" class="col-sm-2 control-label">상담원 이름</label>
+                <label for="agentName" th:field="*{agentName}" class="col-sm-2 control-label">상담원 이름</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control input-large" name="agentName" id="agentName" placeholder="이름"
                            aria-describedby="agentNameHelp" minlength="2" maxlength="10" required>
@@ -32,7 +32,7 @@
             </div>
 
             <div class="form-group">
-                <label for="agentId" class="col-sm-2 control-label">상담원 ID</label>
+                <label for="agentId" th:field="*{agentId}" class="col-sm-2 control-label">상담원 ID</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control input-large" name="agentId" id="agentId" placeholder="아이디"
                            aria-describedby="agentIdHelp" minlength="3" maxlength="10" required>
@@ -40,11 +40,14 @@
                     <small id="agentIdHelp" class="form-text text-muted">
                         3자 이상 20자 이내로 입력하세요.
                     </small>
+                    <small class="invalid-feedback">아이디를 입력하세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('agentId')}" th:errors="*{agentId}">agentId
+                        Error</small>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="password" class="col-sm-2 control-label">비밀번호</label>
+                <label for="password" th:field="*{password}" class="col-sm-2 control-label">비밀번호</label>
                 <div class="col-sm-10">
                     <input type="password" class="form-control input-large" name="password" id="password"
                            aria-describedby="passwordHelp" placeholder="Password" minlength="8" maxlength="50" required>
@@ -55,53 +58,49 @@
             </div>
 
             <div class="form-group">
-                <label for="agentNum" class="col-sm-2 control-label">상담원 사번</label>
+                <label for="agentNum" th:field="*{agentNum}" class="col-sm-2 control-label">상담원 사번</label>
                 <div class="col-sm-10">
                     <input type="number" class="form-control input-large" name="agentNum" id="agentNum"
                            placeholder="사원번호" aria-describedby="agentNumHelp" length="8" required>
                     <small id="agentNumHelp" class="form-text text-muted">
                         사원번호는 숫자 8자리를 입력하세요.
                     </small>
+                    <small class="invalid-feedback">사원번호를 입력하세요.</small>
+                    <small class="form-text text-danger" th:if="${#fields.hasErrors('agentNum')}"
+                           th:errors="*{agentNum}">agentNum
+                        Error</small>
                 </div>
             </div>
 
             <div class="form-group">
-                <label for="part" class="col-sm-2 control-label">부서</label>
+                <label for="part" th:field="*{part}" class="col-sm-2 control-label">부서</label>
                 <div class="col-sm-10">
-                    <select class="form-control mt-2" id="part" name="part" aria-describedby="partHelp" required>
+                    <select class="form-control input-large" id="part" name="part" aria-describedby="partHelp" required>
                         <option value="" selected>부서를 선택해주세요</option>
                         <option value="00">운영</option>
                         <option value="01">1팀</option>
                         <option value="02">2팀</option>
                         <option value="03">3팀</option>
                     </select>
-                    <small id="partHelp" class="form-text text-muted">
-                        알맞은 부서를 선택하세요.
-                    </small>
                 </div>
             </div>
 
             <div class="form-group">
-                <div class="form-group">
-                    <label for="level" class="col-sm-2 control-label">권한</label>
-                    <div class="col-sm-10">
-                        <select class="form-control mt-2" id="level" name="level" aria-describedby="levelHelp" required>
-                            <option value="" selected>권한을 선택해주세요</option>
-                            <option th:each="role : ${roleList}"
-                                    th:value="${role.roleName}"
-                                    th:utext="${role?.roleDesc}">
-                            </option>
-                        </select>
-                        <small id="levelHelp" class="form-text text-muted">
-                            알맞은 권한을 선택하세요.
-                        </small>
-                    </div>
+                <label class="col-sm-2 control-label" for="level" th:field="*{level}">권한</label>
+                <div class="col-sm-10">
+                    <select class="form-control input-large" id="level" name="level" aria-describedby="levelHelp"
+                            required>
+                        <option value="" selected>권한을 선택해주세요</option>
+                        <option th:each="role : ${roleList}"
+                                th:value="${role.roleName}"
+                                th:utext="${role?.roleDesc}">
+                        </option>
+                    </select>
                 </div>
-
             </div>
 
             <div class="form-group">
-                <label for="agentCallNum" class="col-sm-2 control-label">전화번호</label>
+                <label class="col-sm-2 control-label" for="agentCallNum" th:field="*{agentCallNum}">전화번호</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control input-large" name="agentCallNum"
                            aria-describedby="agentCallNumHelp" id="agentCallNum"

@@ -27,7 +27,7 @@ public class AdminRegisterForm {
     @Length(min = 8, max = 50)
     private String password;
 
-    @Length(max = 8)
+    @Length(min = 8, max = 8)
     private String agentNum;
 
     private String part;

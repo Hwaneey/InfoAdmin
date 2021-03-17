@@ -22,4 +22,7 @@ public interface AccountRepository extends JpaRepository<Account,Long>, JpaSpeci
 
     Page<Account> findAll(@Nullable Specification<Account> spec, Pageable pageable);
 
+    boolean existsByAgentId(String agentId);
+
+    boolean existsByAgentNum(String agentNum);
 }

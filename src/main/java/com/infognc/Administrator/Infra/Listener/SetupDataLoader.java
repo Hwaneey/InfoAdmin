@@ -53,6 +53,7 @@ public class SetupDataLoader implements ApplicationListener<ContextRefreshedEven
         roles.add(adminRole);
 
         createUserIfNotFound("admin", "123", roles);
+        createUserIfNotFound("a", "1", roles);
 
     }
 
