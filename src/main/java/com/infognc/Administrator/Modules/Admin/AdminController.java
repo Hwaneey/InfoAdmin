@@ -2,6 +2,7 @@ package com.infognc.Administrator.Modules.Admin;
 
 import com.infognc.Administrator.Modules.Account.Account;
 import com.infognc.Administrator.Modules.Account.AccountRepository;
+import com.infognc.Administrator.Modules.Account.AuthenticationPrincipalAccount;
 import com.infognc.Administrator.Modules.Admin.Validator.AdminRegisterFormValidator;
 import com.infognc.Administrator.Modules.Role.Role;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
@@ -38,7 +38,7 @@ public class AdminController {
 
     @GetMapping("/admin/accountList")
     public String getUsers(Model model,
-                           @PageableDefault(size = 10, direction = Sort.Direction.DESC) Pageable pageable) {
+                           @PageableDefault(size = 30, direction = Sort.Direction.DESC) Pageable pageable) {
 
         List<Account> accounts = accountRepository.findAll();
         Page<Account> accountPage = accountRepository.findAll(pageable);
@@ -97,6 +97,7 @@ public class AdminController {
 
         return "redirect:/admin/accountList";
     }
+
 
     @GetMapping("/admin/accountUpdate/{id}")
     public String getUpdateUser(@PathVariable(value = "id") Long id, Model model) {

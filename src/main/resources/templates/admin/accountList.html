@@ -6,20 +6,7 @@
 
 <body>
 <div th:replace="/fragments/nav :: main-nav"></div>
-
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" th:href="@{/admin/accountList}">계정관리</a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" th:href="@{/counsel/counselList}">상담관리</a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="http://192.168.1.206/adminlist.asp">상담관리2</a>
-    </li>
-</ul>
+<div th:replace="/fragments/nav_tab :: main-nav-tab"></div>
 
 <div class="Container">
     <br>&nbsp;
@@ -153,7 +140,7 @@
             </td>
 
 
-            <td class="date-weekday-time" th:text="${accounts.lastDate}">
+            <td class="date-time" th:text="${accounts.lastDate}">
             </td>
 
 
@@ -222,7 +209,16 @@
         });
     </script>
 
+    <script type="text/javascript">
 
+        function formatDate(date) {
+            return date.getFullYear() + '년 ' +
+                (date.getMonth() + 1) + '월 ' +
+                date.getDate() + '일 ' +
+                date.getHours() + '시 ' +
+                date.getMinutes() + '분';
+        }
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
     <script type="application/javascript">

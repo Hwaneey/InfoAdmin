@@ -4,17 +4,8 @@
 <body>
 <div th:replace="/fragments/nav :: main-nav"></div>
 
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" aria-current="page" th:href="@{/admin/accountList}">계정관리</a>
-    </li>
-<!--    <li class="nav-item">-->
-<!--        <a class="nav-link" th:href="@{/counsel/counselList}">상담관리</a>-->
-<!--    </li>-->
-    <li class="nav-item">
-        <a class="nav-link" href="http://192.168.1.206/adminlist.asp">상담관리</a>
-    </li>
-</ul>
+<div th:replace="/fragments/nav_tab :: main-nav-tab"></div>
+
 
 <div class="col-xs-10">
     <br>
