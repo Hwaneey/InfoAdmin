@@ -22,9 +22,15 @@ public class AccountController {
     }
 
     @GetMapping("/account/profile")
-    public String updateProfileForm(@AuthenticationPrincipalAccount Account account, Model model) {
+    public String getUpdateProfileForm(@AuthenticationPrincipalAccount Account account, Model model) {
         model.addAttribute("account",account);
         return "account/profile";
+    }
+
+    @PostMapping("/account/profile")
+    public String UpdateProfileForm(@AuthenticationPrincipalAccount Account account, Model model){
+
+        return "";
     }
 
 

@@ -59,10 +59,12 @@ public class AdminController {
                          @PageableDefault(size = 10, direction = Sort.Direction.DESC) Pageable pageable, Model model) {
 
         List<Account> accountPage =
-                accountRepository.findByStatusContainingAndAgentIdContainingAndAgentCallNumContainingAndAgentNumContainingAndPartContainingAndLevelContaining
+                accountRepository.
+                        findByStatusContainingAndAgentIdContainingAndAgentCallNumContainingAndAgentNumContainingAndPartContainingAndLevelContaining
                 (status, agentId, agentCallNum, agentNum, part, level);
 
         model.addAttribute("accountPage", accountPage);
+
         return "admin/accountSearch";
     }
 
@@ -112,9 +114,10 @@ public class AdminController {
     }
 
     @PostMapping("/admin/accountUpdate")
-    public String updateUser(Account account,AdminRegisterForm adminRegisterForm, Model model, Errors errors) {
+    public String updateUser(AdminRegisterForm adminRegisterForm) {
 
         adminService.updateUser(adminRegisterForm);
+
         return "redirect:/admin/accountList";
     }
 

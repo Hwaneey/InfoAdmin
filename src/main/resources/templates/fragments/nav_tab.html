@@ -4,7 +4,7 @@
       xmlns:th="http://www.thymeleaf.org">
 <head th:replace="/head :: head"></head>
 <body>
-<div class="container" style="max-width: 80%" th:fragment="main-nav-tab">
+<div class="container" th:fragment="main-nav-tab">
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link active" aria-current="page" th:href="@{/admin/accountList}">계정관리</a>
